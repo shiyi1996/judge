@@ -1,0 +1,34 @@
+[run]
+waitTimeout = 0
+httpPort = 9001
+mode = 'debug'
+dataPath = './data'
+
+[log]
+enable = true
+path = "./logs"
+level = "debug"
+rotatTime = 24   # 日志切割时间间隔：24Hour
+maxAge = 240     # 文件最大保存时间：240Hour
+
+[mysql]
+maxIdle = 5      # 最大空闲连接数
+maxOpen = 10     # 最大打开连接数
+debug = false
+# fightcoderWeb端数据库信息
+webAddr = "root:shiyi@tcp(127.0.0.1:3306)/fightcoder?charset=utf8&loc=Asia%2FShanghai&parseTime=true&wait_timeout=3600"
+
+[nsq]
+lookupds = ["127.0.0.1:4161"]
+judgeTopic = "judge"
+judgeChannel = "real"
+handlerCount = 5
+
+[minio]
+endpoint = "xupt1.fightcoder.com:9000"
+accessKeyID = ""
+secretAccessKey = ""
+secure = false
+
+[judge]
+path = "./work"

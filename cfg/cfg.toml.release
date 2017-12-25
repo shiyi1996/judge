@@ -1,0 +1,34 @@
+[run]
+waitTimeout = 0
+httpPort = 9001
+mode = 'release'
+dataPath = './data'
+
+[log]
+enable = false
+path = "./logs"
+level = "debug"
+rotatTime = 200
+maxAge = 200
+
+[mysql]
+maxIdle = 5
+maxOpen = 10
+debug = true
+
+webAddr = "root:shiyi@tcp(127.0.0.1:3306)/fightcoder?charset=utf8&loc=Asia%2FShanghai&parseTime=true&wait_timeout=3600"
+
+[nsq]
+lookupds = ["127.0.0.1:4161"]
+judgeTopic = "judge"
+judgeChannel = "real"
+handlerCount = 5
+
+[minio]
+endpoint = "xupt1.fightcoder.com:9000"
+accessKeyID = ""
+secretAccessKey = ""
+secure = false
+
+[judge]
+path = "./work"

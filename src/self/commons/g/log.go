@@ -62,6 +62,6 @@ func getLogRotatFileHook(logPath string, logFileName string, maxAge time.Duratio
 		log.ErrorLevel: writer,
 		log.FatalLevel: writer,
 		log.PanicLevel: writer,
-	})
+	}, &log.TextFormatter{ForceColors: true})
 	return lfHook
 }

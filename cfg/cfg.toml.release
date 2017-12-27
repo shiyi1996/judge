@@ -26,9 +26,11 @@ handlerCount = 5
 
 [minio]
 endpoint = "xupt1.fightcoder.com:9000"
-accessKeyID = ""
-secretAccessKey = ""
+accessKeyID = "FightCoder"
+secretAccessKey = "LetsToChangeTheWorld"
 secure = false
+imgBucket = "image"
+codeBucket = "code"
 
 [judge]
 path = "./work"

@@ -58,6 +58,8 @@ type MinioConfig struct {
 	AccessKeyID     string `toml:"accessKeyID"`
 	SecretAccessKey string `toml:"secretAccessKey"`
 	Secure          bool   `toml:"secure"`
+	ImgBucket       string `toml:"imgBucket"`
+	CodeBucket      string `toml:"codeBucket"`
 }
 
 type JudgeConfig struct {

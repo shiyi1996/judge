@@ -30,7 +30,7 @@ func NewDockerCli() DockerCli {
 	return DockerCli{cli}
 }
 
-func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir string) (code int64, msg string) {
+func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir string) (int64, error) {
 	ctx := context.Background()
 
 	containerBody, err := this.cli.ContainerCreate(ctx,
@@ -52,21 +52,9 @@ func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir stri
 	}
 
 	fmt.Println("container ", containerBody.ID, "has start")
-	statusCh, errCh := this.cli.ContainerWait(ctx, containerBody.ID, container.WaitConditionNotRunning)
-	select {
-	case err := <-errCh:
-		if err != nil {
-			panic(err)
-		}
-	case status := <-statusCh:
-		code = status.StatusCode
-		if status.Error != nil {
-			msg = status.Error.Message
-		}
-		return code, msg
-	}
+	code, err := this.cli.ContainerWait(ctx, containerBody.ID)
 
-	return code, msg
+	return code, err
 }
 
 func (this *DockerCli) KillContainer(containerId string) {

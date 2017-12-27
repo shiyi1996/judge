@@ -12,10 +12,19 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"self/commons/components"
 	"self/models"
 
 	log "github.com/sirupsen/logrus"
 )
+
+var codeSuffixMap = map[string]string{
+	"c":      ".cpp",
+	"c++":    ".cpp",
+	"java":   ".java",
+	"golang": ".go",
+	"python": ".py",
+}
 
 type Judger struct {
 	SubmitType      string         `json:"submit_type"`       //提交类型
@@ -25,7 +34,6 @@ type Judger struct {
 	Problem         models.Problem `json:"problem"`           //题目信息
 	Submit          models.Submit  `json:"submit"`            //提交信息
 	WorkDir         string
-	CodeFileName    string
 }
 
 func (this *Judger) DoJudge() {
@@ -37,13 +45,12 @@ func (this *Judger) DoJudge() {
 
 	this.getProblemData()
 	this.getSubmitData()
-
 	this.createWorkDir()
 
-	this.getCases()
-	this.getCode()
+	//this.getCases()
+	//this.getCode()
 
-	this.DoJudge()
+	this.doJudge()
 	//if this.Problem.IsSpecialJudge {
 	//	this.doSpecialJudge()
 	//} else {
@@ -54,24 +61,17 @@ func (this *Judger) DoJudge() {
 }
 
 func (this *Judger) doJudge() {
-}
-
-func (this *Judger) doJudgeInDocker(judgeType string, language string) {
-	dockerCli := NewDockerCli()
-
-	cmd := []string{"/fightcoder-sandbox/sandbox",
-		"-judge_type", judgeType,
-		"-language", language,
-		"-code_file", this.CodeFileName,
-		"-time_limit", "1",
-		"-memory_limit", "128000",
-		"-output_limit", "100"}
-
-	for _, s := range cmd {
-		fmt.Print(s, " ")
+	this.getCode()
+	//如果判题类型没问题，获取特判代码，不必分开
+	sandbox := Sandbox{
+		JudgeType:   "default",
+		Language:    this.Submit.Language,
+		TimeLimit:   int64(this.Problem.TimeLimit),
+		MemoryLimit: int64(this.Problem.MemoryLimit),
+		OutputLimit: 100,
 	}
 
-	dockerCli.RunContainer("sandbox", cmd, this.WorkDir)
+	sandbox.doJudgeInDocker(this.WorkDir)
 }
 
 func (this *Judger) doSpecialJudge() {
@@ -99,11 +99,16 @@ func (this *Judger) removeWorkDir() {
 }
 
 func (this *Judger) getCases() {
+	//minioCli := components.NewMinioCli()
 
+	//minioCli.Download(this.Submit.Code, this.WorkDir+"/code"+codeSuffixMap[this.Submit.Language])
 }
 
 func (this *Judger) getCode() {
+	minioCli := components.NewMinioCli()
 
+	path := this.WorkDir + "/code" + codeSuffixMap[this.Submit.Language]
+	minioCli.Download(this.Submit.Code, path)
 }
 
 func (this *Judger) getProblemData() {

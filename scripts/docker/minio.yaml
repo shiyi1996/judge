@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+ minio:
+  image: minio/minio
+  volumes:
+   - /minio/data:/data
+   - /minio/config:/config
+  ports:
+   - "9000:9000"
+  privileged: true
+  environment:
+   MINIO_ACCESS_KEY: FightCoder
+   MINIO_SECRET_KEY: LetsToChangeTheWorld
+  command: server /data --config-dir /config

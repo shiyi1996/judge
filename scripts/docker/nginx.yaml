@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+ nginx:
+  image: nginx
+  volumes:
+   - /minio/data:/data
+   - /nginx:/etc/nginx
+  ports:
+   - "9001:80"

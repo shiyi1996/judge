@@ -25,7 +25,7 @@ func (this *Handler) HandleMessage(m *nsq.Message) error {
 	judgerData := new(judger.Judger)
 	if err := json.Unmarshal(m.Body, judgerData); err != nil {
 		log.Errorf("unmarshal JudgerData from NsqMessage failed, err: %v, event:%s", err, m.Body)
-		return err
+		return nil
 	}
 
 	fmt.Printf("%#v\n", judgerData)

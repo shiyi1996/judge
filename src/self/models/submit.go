@@ -10,8 +10,8 @@ type Submit struct {
 	UserId        int64  //提交用户ID
 	Language      string //提交语言
 	SubmitTime    int64  //提交时间
-	RunningTime   int    //耗时(ms)
-	RunningMemory int    //所占空间
+	RunningTime   int64  //耗时(ms)
+	RunningMemory int64  //所占空间
 	Result        string //运行结果
 	ResultDes     string //结果描述
 	CaseResult    string //测试数据结果

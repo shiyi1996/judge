@@ -9,7 +9,6 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/Sirupsen/logrus"
 	apierrors "github.com/docker/docker/api/errors"
 	"github.com/docker/docker/api/types"
 	containertypes "github.com/docker/docker/api/types/container"
@@ -21,6 +20,7 @@ import (
 	"github.com/docker/docker/pkg/stringid"
 	"github.com/docker/docker/runconfig"
 	"github.com/opencontainers/runc/libcontainer/label"
+	"github.com/sirupsen/logrus"
 )
 
 // CreateManagedContainer creates a container that is managed by a Service

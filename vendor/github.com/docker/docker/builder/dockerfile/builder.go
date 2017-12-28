@@ -9,7 +9,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/reference"
 	apierrors "github.com/docker/docker/api/errors"
 	"github.com/docker/docker/api/types"
@@ -21,6 +20,7 @@ import (
 	"github.com/docker/docker/image"
 	"github.com/docker/docker/pkg/stringid"
 	perrors "github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 )
 

@@ -6,6 +6,8 @@ import (
 )
 
 type Sandbox struct {
+	SubmitType  string
+	SubmitId    int64
 	JudgeType   string
 	Language    string
 	TimeLimit   int64

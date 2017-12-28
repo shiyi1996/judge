@@ -61,9 +61,17 @@ func (this MinioCli) SaveCode(code string) string {
 	}
 	return this.GetPath(cfg.Minio.CodeBucket, str)
 }
-func (this MinioCli) Download(objectName, filePath string) {
+func (this MinioCli) DownloadCode(objectName, filePath string) {
 	cfg := g.Conf()
 	err := this.cli.FGetObject(cfg.Minio.CodeBucket, objectName, filePath, minio.GetObjectOptions{})
+	if err != nil {
+		panic(err)
+	}
+}
+
+func (this MinioCli) DownloadCase(objectName, filePath string) {
+	cfg := g.Conf()
+	err := this.cli.FGetObject(cfg.Minio.CaseBucket, objectName, filePath, minio.GetObjectOptions{})
 	if err != nil {
 		panic(err)
 	}

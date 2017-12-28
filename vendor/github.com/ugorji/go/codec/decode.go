@@ -1169,15 +1169,15 @@ func (d *Decoder) kStruct(f *codecFnInfo, rv reflect.Value) {
 			dd.ReadMapEnd()
 			return
 		}
-		tisfi := fti.sfi
+		tisfi := fti.sfiSort
 		hasLen := containerLen >= 0
 
-		var rvkencname string
+		var rvkencname []byte
 		for j := 0; (hasLen && j < containerLen) || !(hasLen || dd.CheckBreak()); j++ {
 			if elemsep {
 				dd.ReadMapElemKey()
 			}
-			rvkencname = stringView(decStructFieldKey(dd, fti.keyType, &d.b))
+			rvkencname = decStructFieldKey(dd, fti.keyType, &d.b)
 			if elemsep {
 				dd.ReadMapElemValue()
 			}
@@ -1189,7 +1189,7 @@ func (d *Decoder) kStruct(f *codecFnInfo, rv reflect.Value) {
 					d.decodeValue(sfn.field(si), nil, true)
 				}
 			} else {
-				d.structFieldNotFound(-1, rvkencname)
+				d.structFieldNotFound(-1, stringView(rvkencname))
 			}
 			// keepAlive4StringView(rvkencnameB) // not needed, as reference is outside loop
 		}
@@ -1203,7 +1203,7 @@ func (d *Decoder) kStruct(f *codecFnInfo, rv reflect.Value) {
 		// Not much gain from doing it two ways for array.
 		// Arrays are not used as much for structs.
 		hasLen := containerLen >= 0
-		for j, si := range fti.sfip {
+		for j, si := range fti.sfiSrc {
 			if (hasLen && j == containerLen) || (!hasLen && dd.CheckBreak()) {
 				break
 			}
@@ -1216,9 +1216,9 @@ func (d *Decoder) kStruct(f *codecFnInfo, rv reflect.Value) {
 				d.decodeValue(sfn.field(si), nil, true)
 			}
 		}
-		if containerLen > len(fti.sfip) {
+		if containerLen > len(fti.sfiSrc) {
 			// read remaining values and throw away
-			for j := len(fti.sfip); j < containerLen; j++ {
+			for j := len(fti.sfiSrc); j < containerLen; j++ {
 				if elemsep {
 					dd.ReadArrayElem()
 				}
@@ -1678,12 +1678,9 @@ type decNaked struct {
 
 	*decNakedContainers
 
-	ru reflect.Value // map to primitive above
+	ru, ri, rf, rl, rs, rb, rt reflect.Value // mapping to the primitives above
 
-	// ---- cpu cache line boundary?
-	ri, rf, rl, rs, rt, rb reflect.Value // mapping to the primitives above
-
-	_ [6 * 8]byte // padding // TODO: ??? too big padding???
+	// _ [6]uint64 // padding // no padding - rt goes into next cache line
 }
 
 func (n *decNaked) init() {

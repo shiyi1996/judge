@@ -1,5 +1,5 @@
-hash: 938c2083b3d85d9e6d555e0e44b446c647afa5c90ccb068f7542f304c63ef1cd
-updated: 2017-12-26T03:30:39.61514+08:00
+hash: 513c6cd46219f1c25a238ab0baec82c0e073d020fbf91cf1a54070e0432994cc
+updated: 2017-12-29T00:05:44.086037+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -43,6 +43,14 @@ imports:
   version: d59758554a3d3911fa25c0269de1ebe2f1912c39
 - name: github.com/docker/libtrust
   version: aabc10ec26b754e797f9028f4589c5b7bd90dc20
+- name: github.com/dsnet/compress
+  version: cc9eb1d7ad760af14e8f918698f745e80377af4f
+  subpackages:
+  - bzip2
+  - bzip2/internal/sais
+  - internal
+  - internal/errors
+  - internal/prefix
 - name: github.com/garyburd/redigo
   version: 5f161ed9cfbce31e5a0ec0b1c3c81087e2e9cbef
   subpackages:
@@ -87,6 +95,8 @@ imports:
   version: 04ef93e285313c8978cbc7cad26d2aa7a9927451
 - name: github.com/mattn/go-isatty
   version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
+- name: github.com/mholt/archiver
+  version: cdc68dd1f170b8dfc1a0d2231b5bb0967ed67006
 - name: github.com/Microsoft/go-winio
   version: 78439966b38d69bf38227fbf57ac8a6fee70f69a
 - name: github.com/minio/minio-go
@@ -102,25 +112,33 @@ imports:
   version: b8bc1bf767474819792c23f32d8286a45736f1c6
 - name: github.com/nsqio/go-nsq
   version: eee57a3ac4174c55924125bb15eeeda8cffb6e6f
+- name: github.com/nwaples/rardecode
+  version: e06696f847aeda6f39a8f0b7cdff193b7690aef6
 - name: github.com/opencontainers/go-digest
   version: 279bed98673dd5bef374d3b6e4b09e2af76183bf
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/rifflock/lfshook
   version: 1fdc019a35147ddbb3d25aedf713ad6d1430c144
-- name: github.com/sirupsen/logrus
-  version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
 - name: github.com/Sirupsen/logrus
   version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
-  repo: https://github.com/sirupsen/logrus.git
+- name: github.com/sirupsen/logrus
+  version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
+  repo: https://github.com/Sirupsen/logrus.git
 - name: github.com/TV4/graceful
   version: 38e2b734b7685e370e9c5b384002a885fc173a74
 - name: github.com/ugorji/go
-  version: 7bdfbc68187228a730beb5b825508079b9e757b6
+  version: f2ec36a67857099bae63da282236d9d4c0d2bed6
   subpackages:
   - codec
+- name: github.com/ulikunitz/xz
+  version: 0c6b41e72360850ca4f98dc341fd999726ea007f
+  subpackages:
+  - internal/hash
+  - internal/xlog
+  - lzma
 - name: golang.org/x/crypto
-  version: d585fd2cc9195196078f516b69daff6744ef5e84
+  version: 95a4943f35d008beabde8c11e5075a1b714e6419
   subpackages:
   - ssh/terminal
 - name: golang.org/x/net

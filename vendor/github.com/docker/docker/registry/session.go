@@ -18,7 +18,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/reference"
 	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/docker/docker/api/types"
@@ -27,6 +26,7 @@ import (
 	"github.com/docker/docker/pkg/ioutils"
 	"github.com/docker/docker/pkg/stringid"
 	"github.com/docker/docker/pkg/tarsum"
+	"github.com/sirupsen/logrus"
 )
 
 var (

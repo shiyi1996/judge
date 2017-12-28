@@ -21,6 +21,8 @@ const (
 )
 
 type Result struct {
-	ResultCode int
-	ResultDes  string
+	ResultCode    int
+	ResultDes     string
+	RunningTime   int64 //耗时(ms)
+	RunningMemory int64 //所占空间
 }

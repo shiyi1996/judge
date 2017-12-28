@@ -19,6 +19,7 @@ var judger = Judger{
 	Problem: models.Problem{
 		TimeLimit:   1,
 		MemoryLimit: 128000,
+		InputCase:   "case.zip",
 	},
 	WorkDir: "/Users/shiyi/project/fightcoder/judge/tmp",
 }
@@ -33,4 +34,10 @@ func TestGetCode(t *testing.T) {
 	models.InitAllInTest()
 
 	judger.getCode()
+}
+
+func TestGetCase(t *testing.T) {
+	models.InitAllInTest()
+
+	judger.getCase()
 }

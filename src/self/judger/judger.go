@@ -15,6 +15,7 @@ import (
 	"self/commons/components"
 	"self/models"
 
+	"github.com/mholt/archiver"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -62,8 +63,12 @@ func (this *Judger) DoJudge() {
 
 func (this *Judger) doJudge() {
 	this.getCode()
+	this.getCase()
+
 	//如果判题类型没问题，获取特判代码，不必分开
 	sandbox := Sandbox{
+		SubmitType:  this.SubmitType,
+		SubmitId:    this.SubmitId,
 		JudgeType:   "default",
 		Language:    this.Submit.Language,
 		TimeLimit:   int64(this.Problem.TimeLimit),
@@ -98,17 +103,22 @@ func (this *Judger) createWorkDir() {
 func (this *Judger) removeWorkDir() {
 }
 
-func (this *Judger) getCases() {
-	//minioCli := components.NewMinioCli()
+func (this *Judger) getCase() {
+	minioCli := components.NewMinioCli()
 
-	//minioCli.Download(this.Submit.Code, this.WorkDir+"/code"+codeSuffixMap[this.Submit.Language])
+	minioCli.DownloadCase(this.Problem.InputCase, this.WorkDir+"/case.zip")
+
+	err := archiver.Zip.Open(this.WorkDir+"/case.zip", this.WorkDir)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func (this *Judger) getCode() {
 	minioCli := components.NewMinioCli()
 
 	path := this.WorkDir + "/code" + codeSuffixMap[this.Submit.Language]
-	minioCli.Download(this.Submit.Code, path)
+	minioCli.DownloadCode(this.Submit.Code, path)
 }
 
 func (this *Judger) getProblemData() {

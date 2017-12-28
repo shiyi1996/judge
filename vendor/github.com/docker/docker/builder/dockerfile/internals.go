@@ -18,7 +18,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/backend"
 	"github.com/docker/docker/api/types/container"
@@ -37,6 +36,7 @@ import (
 	"github.com/docker/docker/pkg/urlutil"
 	"github.com/docker/docker/runconfig/opts"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 )
 
 func (b *Builder) commit(id string, autoCmd strslice.StrSlice, comment string) error {

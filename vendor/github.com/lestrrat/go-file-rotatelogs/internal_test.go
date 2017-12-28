@@ -48,4 +48,3 @@ func TestWithLocation(t *testing.T) {
 	opt.Configure(&rl)
 	t.Logf("%s", rl.clock.Now())
 }
-

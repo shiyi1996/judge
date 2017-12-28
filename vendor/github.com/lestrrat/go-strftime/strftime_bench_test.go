@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	jehiah "github.com/jehiah/go-strftime"
 	fastly "github.com/fastly/go-utils/strftime"
+	jehiah "github.com/jehiah/go-strftime"
 	lestrrat "github.com/lestrrat/go-strftime"
 	tebeka "github.com/tebeka/strftime"
 )

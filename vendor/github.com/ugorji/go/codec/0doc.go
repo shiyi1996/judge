@@ -237,7 +237,7 @@ package codec
 //
 //   - Unexport BasicHandle.
 //     If godoc can now show the embedded options, then unexport it.
-// 
+//
 // PUNTED:
 //   - To make Handle comparable, make extHandle in BasicHandle a non-embedded pointer,
 //     and use overlay methods on *BasicHandle to call through to extHandle after initializing
@@ -250,7 +250,7 @@ package codec
 //     - critical shared objects that are read many times
 //       TypeInfos
 //     - pooled objects:
-//       decNaked, decNakedContainers, codecFner, typeInfoLoadArray, 
+//       decNaked, decNakedContainers, codecFner, typeInfoLoadArray,
 //     - small objects allocated independently, that we read/use much across threads:
 //       codecFn, typeInfo
 //     - Objects allocated independently and used a lot

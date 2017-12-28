@@ -5,11 +5,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/builder"
 	"github.com/docker/docker/builder/remotecontext"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 )
 
 // imageContexts is a helper for stacking up built image rootfs and reusing

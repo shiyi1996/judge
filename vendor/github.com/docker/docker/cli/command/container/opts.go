@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types/container"
 	networktypes "github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/api/types/strslice"
@@ -20,6 +19,7 @@ import (
 	runconfigopts "github.com/docker/docker/runconfig/opts"
 	"github.com/docker/go-connections/nat"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
 )
 

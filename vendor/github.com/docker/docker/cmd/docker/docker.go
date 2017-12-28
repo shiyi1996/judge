@@ -6,7 +6,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types/versions"
 	"github.com/docker/docker/cli"
 	"github.com/docker/docker/cli/command"
@@ -17,6 +16,7 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/dockerversion"
 	"github.com/docker/docker/pkg/term"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

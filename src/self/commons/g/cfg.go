@@ -60,6 +60,7 @@ type MinioConfig struct {
 	Secure          bool   `toml:"secure"`
 	ImgBucket       string `toml:"imgBucket"`
 	CodeBucket      string `toml:"codeBucket"`
+	CaseBucket      string `toml:"caseBucket"`
 }
 
 type JudgeConfig struct {

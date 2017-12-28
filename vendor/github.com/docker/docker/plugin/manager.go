@@ -12,7 +12,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/reference"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/image"
@@ -25,6 +24,7 @@ import (
 	"github.com/docker/docker/registry"
 	"github.com/opencontainers/go-digest"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 )
 
 const configFileName = "config.json"

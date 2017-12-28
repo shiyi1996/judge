@@ -10,5 +10,5 @@ import (
 )
 
 func Register(router *gin.Engine) {
-
+	SubmitController{}.Register(router)
 }

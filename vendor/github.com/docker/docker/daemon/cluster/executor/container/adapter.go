@@ -11,7 +11,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/reference"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/backend"
@@ -25,6 +24,7 @@ import (
 	"github.com/docker/swarmkit/log"
 	gogotypes "github.com/gogo/protobuf/types"
 	"github.com/opencontainers/go-digest"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
 )

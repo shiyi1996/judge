@@ -12,9 +12,8 @@ type SubmitContest struct {
 	SubmitTime    int64  //提交时间
 	RunningTime   int64  //耗时(ms)
 	RunningMemory int64  //所占空间
-	Result        string //运行结果
+	Result        int    //运行结果
 	ResultDes     string //结果描述
-	CaseResult    string //测试数据结果
 	Code          string //提交代码
 	ContestId     int64  //比赛Id
 }

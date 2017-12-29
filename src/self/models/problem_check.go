@@ -17,8 +17,7 @@ type ProblemCheck struct {
 	Description        string //题目描述
 	InputDes           string //输入描述
 	OutputDes          string //输出描述
-	InputCase          string //样例输入
-	OutputCase         string //样例输出
+	Case               string //测试样例
 	Hint               string //题目提示(可以为对样例输入输出的解释)
 	TimeLimit          int    //时间限制
 	MemoryLimit        int    //内存限制

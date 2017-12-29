@@ -106,7 +106,7 @@ func (this *Judger) removeWorkDir() {
 func (this *Judger) getCase() {
 	minioCli := components.NewMinioCli()
 
-	minioCli.DownloadCase(this.Problem.InputCase, this.WorkDir+"/case.zip")
+	minioCli.DownloadCase(this.Problem.Case, this.WorkDir+"/case.zip")
 
 	err := archiver.Zip.Open(this.WorkDir+"/case.zip", this.WorkDir)
 	if err != nil {

@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/http"
 
 	"self/controllers/baseController"
 	"self/judger"
@@ -27,10 +28,15 @@ type ChangeSubMess struct {
 
 func (this SubmitController) httpHandlerChangeSubmit(c *gin.Context) {
 	buf, _ := ioutil.ReadAll(c.Request.Body)
+
 	var mess ChangeSubMess
 	if err := json.Unmarshal(buf, &mess); err != nil {
 		panic(err.Error())
 	}
 
-	managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.result)
+	err := managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.result)
+	if err != nil {
+		c.String(http.StatusOK, err.Error())
+	}
+	c.String(http.StatusOK, "OK")
 }

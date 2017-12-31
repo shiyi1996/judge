@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -23,7 +24,7 @@ func (this SubmitController) Register(router *gin.Engine) {
 type ChangeSubMess struct {
 	SubmitType string
 	SubmitId   int64
-	result     judger.Result
+	Result     judger.Result
 }
 
 func (this SubmitController) httpHandlerChangeSubmit(c *gin.Context) {
@@ -34,7 +35,12 @@ func (this SubmitController) httpHandlerChangeSubmit(c *gin.Context) {
 		panic(err.Error())
 	}
 
-	err := managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.result)
+	b, _ := json.Marshal(mess)
+	fmt.Println(string(b))
+
+	fmt.Println(mess)
+
+	err := managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.Result)
 	if err != nil {
 		c.String(http.StatusOK, err.Error())
 	}

@@ -42,6 +42,9 @@ func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir stri
 			Binds: []string{
 				workDir + ":/workspace",
 			},
+			ExtraHosts: []string{"judgeip:128.0.9.207"},
+			//NetworkMode: container.NetworkMode("host"),
+			//AutoRemove:  true,
 		}, nil, "")
 	if err != nil {
 		panic(err)

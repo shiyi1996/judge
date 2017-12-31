@@ -12,6 +12,7 @@ import (
 	"os"
 	"runtime"
 	"self/commons"
+	"self/commons/components"
 	"self/commons/g"
 	"self/controllers"
 	"self/dispatch"
@@ -41,6 +42,9 @@ func main() {
 
 	//初始化路由
 	router := gin.Default()
+
+	// 配置内部程序使用自定义的panic捕获, 自动记录日志、TODO发送邮件等
+	router.Use(components.Recovery())
 
 	controllers.Register(router)
 

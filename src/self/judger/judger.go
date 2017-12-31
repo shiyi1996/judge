@@ -28,13 +28,13 @@ var codeSuffixMap = map[string]string{
 }
 
 type Judger struct {
-	SubmitType      string         `json:"submit_type"`       //提交类型
-	SubmitId        int64          `json:"submit_id"`         //提交id
-	ProblemBankType string         `json:"problem_bank_type"` //题库类型
-	ProblemId       int64          `json:"problem_id"`        //题目Id
-	Problem         models.Problem `json:"problem"`           //题目信息
-	Submit          models.Submit  `json:"submit"`            //提交信息
-	WorkDir         string
+	SubmitType  string         `json:"submit_type"`  //提交类型
+	SubmitId    int64          `json:"submit_id"`    //提交id
+	ProblemType string         `json:"problem_type"` //题库类型
+	ProblemId   int64          `json:"problem_id"`   //题目Id
+	Problem     models.Problem `json:"problem"`      //题目信息
+	Submit      models.Submit  `json:"submit"`       //提交信息
+	WorkDir     string
 }
 
 func (this *Judger) DoJudge() {
@@ -124,7 +124,7 @@ func (this *Judger) getCode() {
 func (this *Judger) getProblemData() {
 	var problemJson []byte
 
-	switch this.ProblemBankType {
+	switch this.ProblemType {
 	case "problem":
 		{
 			problem, err := models.Problem{}.GetById(this.ProblemId)
@@ -144,7 +144,7 @@ func (this *Judger) getProblemData() {
 			break
 		}
 	default:
-		panic("not recognized problemBankType " + this.ProblemBankType)
+		panic("not recognized ProblemType " + this.ProblemType)
 	}
 
 	if err := json.Unmarshal(problemJson, &this.Problem); err != nil {

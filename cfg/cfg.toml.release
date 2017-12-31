@@ -16,7 +16,7 @@ maxIdle = 5
 maxOpen = 10
 debug = true
 
-webAddr = "root:shiyi@tcp(127.0.0.1:3306)/fightcoder?charset=utf8&loc=Asia%2FShanghai&parseTime=true&wait_timeout=3600"
+webAddr = "root:123456@tcp(xupt4.fightcoder.com:9000)/fightcoder?charset=utf8&loc=Asia%2FShanghai&parseTime=true&wait_timeout=3600"
 
 [nsq]
 lookupds = ["127.0.0.1:4161"]

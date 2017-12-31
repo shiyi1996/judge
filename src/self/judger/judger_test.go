@@ -19,7 +19,7 @@ var judger = Judger{
 	Problem: models.Problem{
 		TimeLimit:   1,
 		MemoryLimit: 128000,
-		InputCase:   "case.zip",
+		Case:        "case.zip",
 	},
 	WorkDir: "/Users/shiyi/project/fightcoder/judge/tmp",
 }

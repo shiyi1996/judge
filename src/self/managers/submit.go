@@ -12,8 +12,8 @@ func (this SubmitManager) ChangeSubmitResult(submitType string, submitId int64, 
 	switch submitType {
 	case "submit":
 		submit := models.Submit{
-			Id: submitId,
-			//Result:result.ResultCode,
+			Id:            submitId,
+			Result:        result.ResultCode,
 			ResultDes:     result.ResultDes,
 			RunningTime:   result.RunningTime,
 			RunningMemory: result.RunningMemory,

@@ -2,7 +2,8 @@ package judger
 
 import (
 	"encoding/json"
-	"fmt"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type Sandbox struct {
@@ -23,13 +24,12 @@ func (this *Sandbox) doJudgeInDocker(workDir string) {
 		panic(err)
 	}
 
-	fmt.Println(string(jsonData))
-
-	cmd := []string{"/fightcoder-sandbox/sandbox",
+	cmd := []string{"/sandbox/sandbox",
 		"-judge_data", string(jsonData),
 	}
 
-	fmt.Println("CMD: ", cmd)
-
 	dockerCli.RunContainer("sandbox", cmd, workDir)
+
+	log.Infof("judge in docker sandbox; \ndata: %s \ncmd: %#v; workDir: %s",
+		string(jsonData), cmd, workDir)
 }

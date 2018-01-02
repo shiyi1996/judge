@@ -7,7 +7,6 @@ package dispatch
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"self/judger"
 
@@ -20,15 +19,13 @@ type Handler struct {
 }
 
 func (this *Handler) HandleMessage(m *nsq.Message) error {
-	fmt.Println(string(m.Body))
-
 	judgerData := new(judger.Judger)
 	if err := json.Unmarshal(m.Body, judgerData); err != nil {
 		log.Errorf("unmarshal JudgerData from NsqMessage failed, err: %v, event:%s", err, m.Body)
 		return nil
 	}
 
-	fmt.Printf("%#v\n", judgerData)
+	log.Infof("consume Message from dispatch: %#v", judgerData)
 
 	handlerCount <- 1
 	go this.doJudge(judgerData)

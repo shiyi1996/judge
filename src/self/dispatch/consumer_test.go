@@ -15,8 +15,7 @@ func TestSendMess(t *testing.T) {
 	Nsq{}.send("realJudge", &SendMess{"submit", 1, "problem", 1})
 }
 
-type Nsq struct {
-}
+type Nsq struct{}
 
 type SendMess struct {
 	SubmitType  string `json:"submit_type"`  //提交类型

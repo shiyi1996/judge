@@ -64,7 +64,8 @@ type MinioConfig struct {
 }
 
 type JudgeConfig struct {
-	Path string `toml:"path"`
+	WorkDir string `toml:"workDir"`
+	JudgeIp string `toml:"judgeIp"`
 }
 
 func Conf() *Config {

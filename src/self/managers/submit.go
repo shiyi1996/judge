@@ -11,14 +11,16 @@ type SubmitManager struct {
 func (this SubmitManager) ChangeSubmitResult(submitType string, submitId int64, result judger.Result) error {
 	switch submitType {
 	case "submit":
-		submit := models.Submit{
-			Id:            submitId,
-			Result:        result.ResultCode,
-			ResultDes:     result.ResultDes,
-			RunningTime:   result.RunningTime,
-			RunningMemory: result.RunningMemory,
+		submit, err := models.Submit{}.GetById(submitId)
+		if err != nil {
+			panic(err)
 		}
-		err := models.Submit{}.Update(&submit)
+		submit.Result = result.ResultCode
+		submit.ResultDes = result.ResultDes
+		submit.RunningTime = result.RunningTime
+		submit.RunningMemory = result.RunningMemory
+
+		err = models.Submit{}.Update(submit)
 		if err != nil {
 			panic(err)
 		}

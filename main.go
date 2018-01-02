@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"runtime"
 	"self/commons"
 	"self/commons/components"
 	"self/commons/g"
@@ -22,8 +21,6 @@ import (
 )
 
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	//接收命令行参数
 	version := flag.Bool("v", false, "show version")
 	cfgfile := flag.String("c", "cfg/cfg.toml.debug", "set config file")

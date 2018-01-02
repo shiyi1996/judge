@@ -7,10 +7,12 @@ apk add g++; \
 apk add git; \
 apk add go;
 
-ADD . /workspace
+ENV GOPATH /workspace:/sandbox:/sandbox/deps
 
-ENV GOPATH /workspace:/workspace/fightcoder-sandbox:/workspace/fightcoder-sandbox/deps:
-
+RUN cd /; \
+git clone https://github.com/shiyi1996/sandbox.git; \
+cd sandbox; \
+go build;
 
 WORKDIR /workspace
 

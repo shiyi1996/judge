@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -34,11 +33,6 @@ func (this SubmitController) httpHandlerChangeSubmit(c *gin.Context) {
 	if err := json.Unmarshal(buf, &mess); err != nil {
 		panic(err.Error())
 	}
-
-	b, _ := json.Marshal(mess)
-	fmt.Println(string(b))
-
-	fmt.Println(mess)
 
 	err := managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.Result)
 	if err != nil {

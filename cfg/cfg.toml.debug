@@ -5,7 +5,7 @@ mode = 'debug'
 dataPath = './data'
 
 [log]
-enable = true
+enable = false
 path = "./logs"
 level = "debug"
 rotatTime = 24   # 日志切割时间间隔：24Hour
@@ -34,4 +34,5 @@ codeBucket = "code"
 caseBucket = "case"
 
 [judge]
-path = "./work"
+workDir = "tmp"
+judgeIp = "128.0.9.207"

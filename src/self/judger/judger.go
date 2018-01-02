@@ -7,12 +7,12 @@ package judger
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
 
 	"self/commons/components"
+	"self/commons/g"
 	"self/models"
 
 	"github.com/mholt/archiver"
@@ -47,9 +47,6 @@ func (this *Judger) DoJudge() {
 	this.getProblemData()
 	this.getSubmitData()
 	this.createWorkDir()
-
-	//this.getCases()
-	//this.getCode()
 
 	this.doJudge()
 	//if this.Problem.IsSpecialJudge {
@@ -92,11 +89,14 @@ func (this *Judger) doTestJudge() {
 }
 
 func (this *Judger) createWorkDir() {
-	this.WorkDir = getCurrentPath() + "/tmp/" + strconv.FormatInt(this.Submit.UserId, 10) + "_" + this.SubmitType + "_" + strconv.FormatInt(this.Submit.Id, 10)
+	cfg := g.Conf()
+	this.WorkDir = getCurrentPath() + "/" + cfg.Judge.WorkDir + "/" +
+		strconv.FormatInt(this.Submit.UserId, 10) + "_" +
+		this.SubmitType + "_" + strconv.FormatInt(this.Submit.Id, 10)
 
 	err := os.MkdirAll(this.WorkDir, 0777)
 	if err != nil {
-		panic(err)
+		panic("createWorkDir: " + err.Error())
 	}
 }
 
@@ -105,12 +105,11 @@ func (this *Judger) removeWorkDir() {
 
 func (this *Judger) getCase() {
 	minioCli := components.NewMinioCli()
-
 	minioCli.DownloadCase(this.Problem.Case, this.WorkDir+"/case.zip")
 
-	err := archiver.Zip.Open(this.WorkDir+"/case.zip", this.WorkDir)
+	err := archiver.Zip.Open(this.WorkDir+"/case.zip", this.WorkDir+"/case")
 	if err != nil {
-		panic(err)
+		panic("getCase: " + err.Error())
 	}
 }
 
@@ -129,7 +128,7 @@ func (this *Judger) getProblemData() {
 		{
 			problem, err := models.Problem{}.GetById(this.ProblemId)
 			if err != nil {
-				panic(err)
+				panic("getProblemData-Problem: " + err.Error())
 			}
 			problemJson, err = json.Marshal(problem)
 			break
@@ -138,20 +137,20 @@ func (this *Judger) getProblemData() {
 		{
 			problemUser, err := models.ProblemUser{}.GetById(this.ProblemId)
 			if err != nil {
-				panic(err)
+				panic("getProblemData-ProblemUser: " + err.Error())
 			}
 			problemJson, err = json.Marshal(problemUser)
 			break
 		}
 	default:
-		panic("not recognized ProblemType " + this.ProblemType)
+		panic("getProblemData: not recognized ProblemType " + this.ProblemType)
 	}
 
 	if err := json.Unmarshal(problemJson, &this.Problem); err != nil {
-		panic(err)
+		panic("getProblemData: " + err.Error())
 	}
 
-	fmt.Printf("%#v\n", this.Problem)
+	log.Infof("getProblemData: %#v\n", this.Problem)
 }
 
 func (this *Judger) getSubmitData() {
@@ -162,7 +161,7 @@ func (this *Judger) getSubmitData() {
 		{
 			submit, err := models.Submit{}.GetById(this.SubmitId)
 			if err != nil {
-				panic(err)
+				panic("getSubmitData-Submit: " + err.Error())
 			}
 			submitJson, err = json.Marshal(submit)
 			break
@@ -171,7 +170,7 @@ func (this *Judger) getSubmitData() {
 		{
 			submitUser, err := models.SubmitUser{}.GetById(this.SubmitId)
 			if err != nil {
-				panic(err)
+				panic("getSubmitData-SubmitUser: " + err.Error())
 			}
 			submitJson, err = json.Marshal(submitUser)
 			break
@@ -180,7 +179,7 @@ func (this *Judger) getSubmitData() {
 		{
 			submitContest, err := models.SubmitContest{}.GetById(this.SubmitId)
 			if err != nil {
-				panic(err)
+				panic("getSubmitData-SubmitContest: " + err.Error())
 			}
 			submitJson, err = json.Marshal(submitContest)
 			break
@@ -190,20 +189,20 @@ func (this *Judger) getSubmitData() {
 
 		}
 	default:
-		panic("not recognized submitType " + this.SubmitType)
+		panic("getSubmitData: not recognized submitType " + this.SubmitType)
 	}
 
 	if err := json.Unmarshal(submitJson, &this.Submit); err != nil {
-		panic(err)
+		panic("getSubmitData: " + err.Error())
 	}
 
-	fmt.Printf("%#v\n", this.Submit)
+	log.Infof("getSubmitData: %#v\n", this.Submit)
 }
 
 func getCurrentPath() string {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		panic(err)
+		panic("getCurrentPath: " + err.Error())
 	}
 	return dir
 }

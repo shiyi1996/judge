@@ -7,14 +7,16 @@ package judger
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"os"
 	"time"
 
+	"self/commons/g"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	log "github.com/sirupsen/logrus"
 )
 
 type DockerCli struct {
@@ -33,6 +35,8 @@ func NewDockerCli() DockerCli {
 func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir string) (int64, error) {
 	ctx := context.Background()
 
+	cfg := g.Conf()
+
 	containerBody, err := this.cli.ContainerCreate(ctx,
 		&container.Config{
 			Image: imageName,
@@ -42,7 +46,7 @@ func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir stri
 			Binds: []string{
 				workDir + ":/workspace",
 			},
-			ExtraHosts: []string{"judgeip:128.0.9.207"},
+			ExtraHosts: []string{"judgeip:" + cfg.Judge.JudgeIp},
 			//NetworkMode: container.NetworkMode("host"),
 			//AutoRemove:  true,
 		}, nil, "")
@@ -54,7 +58,8 @@ func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir stri
 		panic(err)
 	}
 
-	fmt.Println("container ", containerBody.ID, "has start")
+	log.Infof("workdir with container start, containerId = %s", containerBody.ID)
+
 	code, err := this.cli.ContainerWait(ctx, containerBody.ID)
 
 	return code, err

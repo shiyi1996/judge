@@ -52,7 +52,6 @@ func (this *Consumer) newConsumer(topic, channel string) {
 
 	this.NsqConsumer.AddHandler(&Handler{Topic: topic})
 
-	//err = this.NsqConsumer.ConnectToNSQD("hk.fightcoder.com:4150")
 	err = this.NsqConsumer.ConnectToNSQLookupds(g.Conf().Nsq.Lookupds)
 	if err != nil {
 		log.Fatal(err)

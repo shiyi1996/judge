@@ -33,4 +33,4 @@ imgBucket = "image"
 codeBucket = "code"
 
 [judge]
-path = "./work"
+workdir = "./work"

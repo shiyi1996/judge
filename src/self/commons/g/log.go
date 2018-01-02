@@ -23,6 +23,7 @@ func InitLog() {
 		fmt.Println("log to std err")
 		log.SetOutput(os.Stdout)
 		log.SetLevel(log.DebugLevel)
+		log.SetFormatter(&log.TextFormatter{ForceColors: true})
 		return
 	}
 

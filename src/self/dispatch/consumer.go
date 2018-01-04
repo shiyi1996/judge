@@ -6,11 +6,10 @@
 package dispatch
 
 import (
-	"log"
-
 	"self/commons/g"
 
 	"github.com/nsqio/go-nsq"
+	log "github.com/sirupsen/logrus"
 )
 
 type Consumer struct {

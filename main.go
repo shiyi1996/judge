@@ -54,5 +54,6 @@ func main() {
 	})
 
 	//关闭框架组件
+	dispatch.StopConsume()
 	commons.CloseAll()
 }

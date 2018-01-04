@@ -11,8 +11,16 @@ import (
 	"github.com/nsqio/go-nsq"
 )
 
-func TestSendMess(t *testing.T) {
+func TestSendMessCpp(t *testing.T) {
 	Nsq{}.send("realJudge", &SendMess{"submit", 1, "problem", 1})
+}
+
+func TestSendMessC(t *testing.T) {
+	Nsq{}.send("realJudge", &SendMess{"submit", 2, "problem", 1})
+}
+
+func TestSendMessPy(t *testing.T) {
+	Nsq{}.send("realJudge", &SendMess{"submit", 3, "problem", 1})
 }
 
 type Nsq struct{}

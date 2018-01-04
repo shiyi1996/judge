@@ -20,7 +20,7 @@ import (
 )
 
 var codeSuffixMap = map[string]string{
-	"c":      ".cpp",
+	"c":      ".c",
 	"c++":    ".cpp",
 	"java":   ".java",
 	"golang": ".go",

@@ -10,6 +10,7 @@ import (
 	"self/managers"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 type SubmitController struct {
@@ -33,6 +34,8 @@ func (this SubmitController) httpHandlerChangeSubmit(c *gin.Context) {
 	if err := json.Unmarshal(buf, &mess); err != nil {
 		panic(err.Error())
 	}
+
+	log.Infof("submitController: %#v", mess)
 
 	err := managers.SubmitManager{}.ChangeSubmitResult(mess.SubmitType, mess.SubmitId, mess.Result)
 	if err != nil {

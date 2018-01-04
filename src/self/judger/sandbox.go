@@ -28,8 +28,8 @@ func (this *Sandbox) doJudgeInDocker(workDir string) {
 		"-judge_data", string(jsonData),
 	}
 
-	dockerCli.RunContainer("sandbox", cmd, workDir)
-
 	log.Infof("judge in docker sandbox; \ndata: %s \ncmd: %#v; workDir: %s",
 		string(jsonData), cmd, workDir)
+
+	dockerCli.RunContainer("sandbox", cmd, workDir)
 }

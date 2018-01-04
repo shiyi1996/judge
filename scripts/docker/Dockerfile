@@ -1,9 +1,9 @@
-FROM alpine:latest
+FROM java:alpine
 MAINTAINER ShiYi <shiyi@fightcoder.com>
 
 RUN apk upgrade --update; \
-apk add python; \
 apk add g++; \
+apk add python; \
 apk add git; \
 apk add go;
 

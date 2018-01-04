@@ -254,7 +254,7 @@ DROP TABLE IF EXISTS `problem`;
 CREATE TABLE `problem` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` bigint(20) NOT NULL COMMENT '题目提供者',
-  `test_data` varchar(2000) NOT NULL COMMENT '测试数据',
+  `test_data` varchar(2000) COMMENT '测试数据',
   `titile` varchar(50) NOT NULL COMMENT '题目标题',
   `description` varchar(500) NOT NULL COMMENT '题目描述',
   `input_des` varchar(300) NOT NULL COMMENT '输入描述',
@@ -292,7 +292,7 @@ DROP TABLE IF EXISTS `problem_check`;
 CREATE TABLE `problem_check` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` bigint(20) NOT NULL COMMENT '题目提供者',
-  `test_data` varchar(2000) NOT NULL COMMENT '测试数据',
+  `test_data` varchar(2000) COMMENT '测试数据',
   `titile` varchar(50) NOT NULL COMMENT '题目标题',
   `description` varchar(500) NOT NULL COMMENT '题目描述',
   `input_des` varchar(300) NOT NULL COMMENT '输入描述',
@@ -335,7 +335,7 @@ DROP TABLE IF EXISTS `problem_user`;
 CREATE TABLE `problem_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` bigint(20) NOT NULL COMMENT '题目提供者',
-  `test_data` varchar(2000) NOT NULL COMMENT '测试数据',
+  `test_data` varchar(2000) COMMENT '测试数据',
   `titile` varchar(50) NOT NULL COMMENT '题目标题',
   `description` varchar(500) NOT NULL COMMENT '题目描述',
   `input_des` varchar(300) NOT NULL COMMENT '输入描述',
@@ -427,6 +427,7 @@ DROP TABLE IF EXISTS `submit`;
 CREATE TABLE `submit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `problem_id` bigint(20) NOT NULL COMMENT '题目ID',
+  `problem_type` varchar(20) NOT NULL COMMENT '题库类型',
   `user_id` bigint(20) NOT NULL COMMENT '提交用户ID',
   `language` varchar(20) NOT NULL COMMENT '提交语言',
   `submit_time` bigint(20) NOT NULL COMMENT '提交时间',
@@ -461,6 +462,7 @@ DROP TABLE IF EXISTS `submit_contest`;
 CREATE TABLE `submit_contest` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `problem_id` bigint(20) NOT NULL COMMENT '题目ID',
+  `problem_type` varchar(20) NOT NULL COMMENT '题库类型',
   `user_id` bigint(20) NOT NULL COMMENT '提交用户ID',
   `language` varchar(20) NOT NULL COMMENT '提交语言',
   `submit_time` bigint(20) NOT NULL COMMENT '提交时间',
@@ -497,6 +499,7 @@ DROP TABLE IF EXISTS `submit_user`;
 CREATE TABLE `submit_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `problem_id` bigint(20) NOT NULL COMMENT '题目ID',
+  `problem_type` varchar(20) NOT NULL COMMENT '题库类型',
   `user_id` bigint(20) NOT NULL COMMENT '提交用户ID',
   `language` varchar(20) NOT NULL COMMENT '提交语言',
   `submit_time` bigint(20) NOT NULL COMMENT '提交时间',

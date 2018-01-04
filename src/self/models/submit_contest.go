@@ -7,6 +7,7 @@ import (
 type SubmitContest struct {
 	Id            int64
 	ProblemId     int64  //题目ID
+	ProblemType   string //题目所属题库
 	UserId        int64  //提交用户ID
 	Language      string //提交语言
 	SubmitTime    int64  //提交时间

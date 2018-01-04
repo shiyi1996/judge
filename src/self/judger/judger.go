@@ -28,13 +28,11 @@ var codeSuffixMap = map[string]string{
 }
 
 type Judger struct {
-	SubmitType  string         `json:"submit_type"`  //提交类型
-	SubmitId    int64          `json:"submit_id"`    //提交id
-	ProblemType string         `json:"problem_type"` //题库类型
-	ProblemId   int64          `json:"problem_id"`   //题目Id
-	Problem     models.Problem `json:"problem"`      //题目信息
-	Submit      models.Submit  `json:"submit"`       //提交信息
-	WorkDir     string
+	SubmitType string         `json:"submit_type"` //提交类型
+	SubmitId   int64          `json:"submit_id"`   //提交id
+	Problem    models.Problem `json:"problem"`     //题目信息
+	Submit     models.Submit  `json:"submit"`      //提交信息
+	WorkDir    string
 }
 
 func (this *Judger) DoJudge() {
@@ -44,8 +42,8 @@ func (this *Judger) DoJudge() {
 		}
 	}()
 
-	this.getProblemData()
 	this.getSubmitData()
+	this.getProblemData(this.Submit.ProblemType)
 	this.createWorkDir()
 
 	this.doJudge()
@@ -155,22 +153,22 @@ func (this *Judger) saveSubmit() {
 	}
 }
 
-func (this *Judger) getProblemData() {
+func (this *Judger) getProblemData(problemType string) {
 	var problemJson []byte
 
-	switch this.ProblemType {
-	case "problem":
+	switch problemType {
+	case "real":
 		{
-			problem, err := models.Problem{}.GetById(this.ProblemId)
+			problem, err := models.Problem{}.GetById(this.Submit.ProblemId)
 			if err != nil {
 				panic("getProblemData-Problem: " + err.Error())
 			}
 			problemJson, err = json.Marshal(problem)
 			break
 		}
-	case "problem_user":
+	case "user":
 		{
-			problemUser, err := models.ProblemUser{}.GetById(this.ProblemId)
+			problemUser, err := models.ProblemUser{}.GetById(this.Submit.ProblemId)
 			if err != nil {
 				panic("getProblemData-ProblemUser: " + err.Error())
 			}
@@ -178,7 +176,7 @@ func (this *Judger) getProblemData() {
 			break
 		}
 	default:
-		panic("getProblemData: not recognized ProblemType " + this.ProblemType)
+		panic("getProblemData: not recognized ProblemType " + this.Submit.ProblemType)
 	}
 
 	if err := json.Unmarshal(problemJson, &this.Problem); err != nil {

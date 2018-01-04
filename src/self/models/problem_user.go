@@ -12,12 +12,13 @@ import (
 type ProblemUser struct {
 	Id                 int64
 	UserId             int64  //题目提供者
-	TestData           string //测试数据
+	CaseData           string //测试数据
 	Titile             string //题目标题
 	Description        string //题目描述
 	InputDes           string //输入描述
 	OutputDes          string //输出描述
-	Case               string //测试样例
+	InputCase          string //测试输入
+	OutputCase         string //测试输出
 	Hint               string //题目提示(可以为对样例输入输出的解释)
 	TimeLimit          int    //时间限制
 	MemoryLimit        int    //内存限制

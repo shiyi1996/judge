@@ -35,6 +35,7 @@ type Judger struct {
 	WorkDir    string
 }
 
+// TODO Java
 func (this *Judger) DoJudge() {
 	defer func() {
 		if err := recover(); err != nil {

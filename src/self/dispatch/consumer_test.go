@@ -23,6 +23,10 @@ func TestSendMessC(t *testing.T) {
 	Nsq{}.send("realJudge", &SendMess{"submit", 3, "problem", 1})
 }
 
+func TestSendMessGo(t *testing.T) {
+	Nsq{}.send("realJudge", &SendMess{"submit", 4, "problem", 1})
+}
+
 type Nsq struct{}
 
 type SendMess struct {

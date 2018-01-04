@@ -16,7 +16,7 @@ type Sandbox struct {
 	OutputLimit int64
 }
 
-func (this *Sandbox) doJudgeInDocker(workDir string) {
+func (this *Sandbox) doJudgeInDocker(workDir string) (int64, error) {
 	dockerCli := NewDockerCli()
 
 	jsonData, err := json.Marshal(this)
@@ -31,5 +31,7 @@ func (this *Sandbox) doJudgeInDocker(workDir string) {
 	log.Infof("judge in docker sandbox; \ndata: %s \ncmd: %#v; workDir: %s",
 		string(jsonData), cmd, workDir)
 
-	dockerCli.RunContainer("sandbox", cmd, workDir)
+	code, err := dockerCli.RunContainer("sandbox", cmd, workDir)
+
+	return code, err
 }

@@ -12,11 +12,11 @@ import (
 )
 
 func TestSendMessCpp(t *testing.T) {
-	Nsq{}.send("realJudge", &SendMess{"submit", 1, "problem", 1})
+	Nsq{}.send("realJudge", &SendMess{"submit", 4, "problem", 1})
 }
 
 func TestSendMessC(t *testing.T) {
-	Nsq{}.send("realJudge", &SendMess{"submit", 2, "problem", 1})
+	Nsq{}.send("realJudge", &SendMess{"submit", 5, "problem", 1})
 }
 
 func TestSendMessPy(t *testing.T) {

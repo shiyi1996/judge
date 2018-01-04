@@ -73,7 +73,17 @@ func (this *Judger) doJudge() {
 		OutputLimit: 100,
 	}
 
-	sandbox.doJudgeInDocker(this.WorkDir)
+	code, _ := sandbox.doJudgeInDocker(this.WorkDir)
+	if code != 0 {
+		this.getSubmitData()
+		if this.Submit.Result == Normal ||
+			this.Submit.Result == Waiting ||
+			this.Submit.Result == Compiling ||
+			this.Submit.Result == Running {
+			this.Submit.Result = SystemError
+			this.saveSubmit()
+		}
+	}
 }
 
 func (this *Judger) doSpecialJudge() {
@@ -118,6 +128,31 @@ func (this *Judger) getCode() {
 
 	path := this.WorkDir + "/code" + codeSuffixMap[this.Submit.Language]
 	minioCli.DownloadCode(this.Submit.Code, path)
+}
+
+func (this *Judger) saveSubmit() {
+	switch this.SubmitType {
+	case "submit":
+		submit, err := models.Submit{}.GetById(this.SubmitId)
+		if err != nil {
+			panic(err)
+		}
+		submit.Result = this.Submit.Result
+		submit.ResultDes = this.Submit.ResultDes
+		submit.RunningTime = this.Submit.RunningTime
+		submit.RunningMemory = this.Submit.RunningMemory
+
+		err = models.Submit{}.Update(submit)
+		if err != nil {
+			panic(err)
+		}
+
+		log.Infof("saveSubmit: %#v", submit)
+
+	case "submit_contest":
+	case "submit_user":
+	case "submit_test":
+	}
 }
 
 func (this *Judger) getProblemData() {

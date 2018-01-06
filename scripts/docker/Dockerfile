@@ -11,7 +11,7 @@ RUN apk add git;
  ENV GOPATH /workspace:/sandbox:/sandbox/deps
 
  RUN cd /; \
- git clone https://github.com/shiyi1996/sandbox.git; \
+ git clone https://github.com/shiyi1996/sandbox.git;  \
  cd sandbox; \
  go build;
 

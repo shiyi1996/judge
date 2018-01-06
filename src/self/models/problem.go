@@ -8,7 +8,7 @@ type Problem struct {
 	Id                 int64
 	UserId             int64  //题目提供者
 	CaseData           string //测试数据
-	Titile             string //题目标题
+	Title             string //题目标题
 	Description        string //题目描述
 	InputDes           string //输入描述
 	OutputDes          string //输出描述
@@ -72,9 +72,9 @@ func (this Problem) GetByUserId(userId int64) (*Problem, error) {
 	return problem, nil
 }
 
-func (this Problem) QueryByTitile(titile string) ([]*Problem, error) {
+func (this Problem) QueryByTitle(title string) ([]*Problem, error) {
 	problemList := make([]*Problem, 0)
-	err := OrmWeb.Where("titile like ?", "%"+titile+"%").Find(&problemList)
+	err := OrmWeb.Where("title like ?", "%"+title+"%").Find(&problemList)
 	if err != nil {
 		return nil, err
 	}

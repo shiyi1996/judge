@@ -13,7 +13,7 @@ type ProblemCheck struct {
 	Id                 int64
 	UserId             int64  //题目提供者
 	CaseData           string //测试数据
-	Titile             string //题目标题
+	Title             string //题目标题
 	Description        string //题目描述
 	InputDes           string //输入描述
 	OutputDes          string //输出描述

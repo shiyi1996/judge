@@ -5,7 +5,7 @@ import "testing"
 func TestProblemUserCreate(t *testing.T) {
 	InitAllInTest()
 
-	problemUser := &ProblemUser{Titile: "sadas", Description: "1111"}
+	problemUser := &ProblemUser{Title: "sadas", Description: "1111"}
 	if _, err := problemUser.Create(problemUser); err != nil {
 		t.Error("Create() failed. Error:", err)
 	}
@@ -21,7 +21,7 @@ func TestProblemUserRemove(t *testing.T) {
 func TestProblemUserUpdate(t *testing.T) {
 	InitAllInTest()
 
-	problemUser := &ProblemUser{Titile: "sadas", Description: "asdasdasd"}
+	problemUser := &ProblemUser{Title: "sadas", Description: "asdasdasd"}
 	if err := problemUser.Update(problemUser); err != nil {
 		t.Error("Update() failed. Error:", err)
 	}
@@ -29,7 +29,7 @@ func TestProblemUserUpdate(t *testing.T) {
 func TestProblemUserGetById(t *testing.T) {
 	InitAllInTest()
 
-	problemUser := &ProblemUser{Titile: "sadas", Description: "fffff"}
+	problemUser := &ProblemUser{Title: "sadas", Description: "fffff"}
 	ProblemUser{}.Create(problemUser)
 
 	getProblemUser, err := ProblemUser{}.GetById(problemUser.Id)
@@ -44,7 +44,7 @@ func TestProblemUserGetById(t *testing.T) {
 
 func TestProblemUserQueryByUserId(t *testing.T) {
 	InitAllInTest()
-	problemUser := &ProblemUser{Titile: "sadas", Description: "fffff", UserId: 1}
+	problemUser := &ProblemUser{Title: "sadas", Description: "fffff", UserId: 1}
 	ProblemUser{}.Create(problemUser)
 
 	getProblemUser, err := ProblemUser{}.QueryByUserId(problemUser.UserId)

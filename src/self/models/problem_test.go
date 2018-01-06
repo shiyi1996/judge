@@ -12,7 +12,7 @@ import (
 func TestProblemCreate(t *testing.T) {
 	InitAllInTest()
 
-	problem := &Problem{Titile: "sadas", Description: "1111"}
+	problem := &Problem{Title: "sadas", Description: "1111"}
 	if _, err := problem.Create(problem); err != nil {
 		t.Error("Create() failed. Error:", err)
 	}
@@ -28,7 +28,7 @@ func TestProblemRemove(t *testing.T) {
 func TestProblemUpdate(t *testing.T) {
 	InitAllInTest()
 
-	problem := &Problem{Titile: "sadas", Description: "asdasdasd"}
+	problem := &Problem{Title: "sadas", Description: "asdasdasd"}
 	if err := problem.Update(problem); err != nil {
 		t.Error("Update() failed. Error:", err)
 	}
@@ -36,7 +36,7 @@ func TestProblemUpdate(t *testing.T) {
 func TestProblemGetById(t *testing.T) {
 	InitAllInTest()
 
-	problem := &Problem{Titile: "sadas", Description: "fffff"}
+	problem := &Problem{Title: "sadas", Description: "fffff"}
 	Problem{}.Create(problem)
 
 	getProblem, err := Problem{}.GetById(problem.Id)
@@ -51,13 +51,13 @@ func TestProblemGetById(t *testing.T) {
 func TestProblemQueryByTitile(t *testing.T) {
 	InitAllInTest()
 
-	problem1 := &Problem{Titile: "测试"}
-	problem2 := &Problem{Titile: "测试"}
+	problem1 := &Problem{Title: "测试"}
+	problem2 := &Problem{Title: "测试"}
 
 	Problem{}.Create(problem1)
 	Problem{}.Create(problem2)
 
-	problemList, err := Problem{}.QueryByTitile("测试")
+	problemList, err := Problem{}.QueryByTitle("测试")
 	if err != nil {
 		t.Error("QueryByTitile() failed:", err)
 	}

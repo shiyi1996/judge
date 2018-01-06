@@ -19,6 +19,8 @@ type Handler struct {
 }
 
 func (this *Handler) HandleMessage(m *nsq.Message) error {
+	log.Infof("HandbleMessage: ", string(m.Body))
+
 	judgerData := new(judger.Judger)
 	if err := json.Unmarshal(m.Body, judgerData); err != nil {
 		log.Errorf("unmarshal JudgerData from NsqMessage failed, err: %v, event:%s", err, m.Body)

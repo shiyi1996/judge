@@ -51,7 +51,7 @@ func (this *DockerCli) RunContainer(imageName string, cmd []string, workDir stri
 			AutoRemove: true,
 			Resources: container.Resources{
 				NanoCPUs: 2,
-				Memory:   51200000,
+				Memory:   512000000,
 			},
 		}, nil, "")
 	if err != nil {

@@ -10,16 +10,16 @@ RUN curl https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz | tar xz
 RUN mkdir /lib64; \
     ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2;
 
-ENV GOPATH /workspace:/judge:/judge/deps
+ENV GOPATH /workspace:/fightcoder-web:/fightcoder-web/deps
 ENV GOROOT /goroot
 ENV GOBIN=$GOPATH/bin
 ENV PATH=$PATH:$GOROOT/bin
 
 RUN cd /; \
-    git clone https://github.com/shiyi1996/judge.git; \
-    cd sandbox; \
+    git clone https://github.com/leeezm/fightcoder-web.git; \
+    cd fightcoder-web; \
     go build;
 
-WORKDIR /judge
+WORKDIR /fightcoder-web
 
 CMD while true; do sleep 1; done
